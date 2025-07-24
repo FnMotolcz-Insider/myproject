@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T-Shirt Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Loading animation -->
+    <div class="loading">
+        <div class="spinner"></div>
+    </div>
     <header>
         <h1>T-Shirt Shop</h1>
         <nav>
@@ -21,23 +28,58 @@
     </header>
 
     <main>
+        <section class="hero">
+            <h2>Premium Quality T-Shirts</h2>
+            <p>Discover our collection of comfortable, stylish, and high-quality t-shirts made from 100% organic cotton.</p>
+            <a href="#products" class="cta-button">Shop Now</a>
+        </section>
         <section class="products">
             <div class="product">
-                <img src="https://via.placeholder.com/300x300" alt="Classic White T-Shirt">
-                <h3>Classic White</h3>
-                <p>$19.99</p>
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80" alt="Classic White T-Shirt">
+                <div class="product-info">
+                    <h3>Classic White</h3>
+                    <p>$19.99</p>
+                </div>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product">
-                <img src="https://via.placeholder.com/300x300" alt="Black Logo T-Shirt">
-                <h3>Black Logo</h3>
-                <p>$24.99</p>
+                <img src="https://i.pinimg.com/originals/18/c3/16/18c3165d436e3e72f0f8ffc892c2a73e.jpg" alt="Black Logo T-Shirt">
+                <div class="product-info">
+                    <h3>Black Logo</h3>
+                    <p>$24.99</p>
+                </div>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product">
-                <img src="https://via.placeholder.com/300x300" alt="Graphic Print T-Shirt">
-                <h3>Graphic Print</h3>
-                <p>$29.99</p>
+                <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80" alt="Graphic Print T-Shirt">
+                <div class="product-info">
+                    <h3>Graphic Print</h3>
+                    <p>$29.99</p>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://th.bing.com/th/id/R.00db62e6456eb886ac09378fef763e8b?rik=UvYqzQ%2bI82oYeg&riu=http%3a%2f%2fwww.designhill.com%2fdesign-blog%2fwp-content%2fuploads%2f2017%2f08%2fcar-t-shirt-design.png&ehk=q%2boZ9jmMkDQ7yB3vO77eFzxEVEkgyS44Khq8D2IZs94%3d&risl=&pid=ImgRaw&r=0" alt="Vintage Retro T-Shirt">
+                <div class="product-info">
+                    <h3>Vintage Retro</h3>
+                    <p>$22.99</p>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/8d/bc/f3/8dbcf37e1422b26be7ca880a5e549f37.jpg" alt="Striped Casual T-Shirt">
+                <div class="product-info">
+                    <h3>Striped Casual</h3>
+                    <p>$21.99</p>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://personalisedclothingandsigns.com/wp-content/uploads/2020/05/UC102-Red-scaled.jpg" alt="Premium Polo Shirt">
+                <div class="product-info">
+                    <h3>Premium Polo</h3>
+                    <p>$34.99</p>
+                </div>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
         </section>
