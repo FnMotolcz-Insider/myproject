@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - T-Shirt Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .checkout-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .order-summary, .checkout-form {
+            background-color: var(--light-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .order-summary h3, .checkout-form h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-total {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--primary-color);
+            text-align: right;
+        }
+        
+        .order-total h4 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: var(--font-family);
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .checkout-btn {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-family);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .checkout-btn:hover {
+            background-color: #ff5252;
+        }
+        
+        .back-to-shop {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .back-to-shop:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading animation -->
+    <div class="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <header>
+        <h1>T-Shirt Shop</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#products">Shop</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li class="cart"><a href="index.html">Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="checkout-container">
+            <a href="index.html" class="back-to-shop">← Back to Shop</a>
+            <h2>Checkout</h2>
+            
+            <div class="checkout-content">
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    <div id="order-items"></div>
+                    <div class="order-total">
+                        <h4>Total: $<span id="order-total-amount">0.00</span></h4>
+                    </div>
+                </div>
+
+                <!-- Checkout Form -->
+                <div class="checkout-form">
+                    <h3>Delivery Information</h3>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label for="fullname">Full Name *</label>
+                            <input type="text" id="fullname" name="fullname" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Street Address *</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">ZIP Code *</label>
+                                <input type="text" id="zip" name="zip" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Country *</label>
+                            <select id="country" name="country" required>
+                                <option value="">Select Country</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="AU">Australia</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="CZ">Czech Republic</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <h3>Payment Information</h3>
+                        <div class="form-group">
+                            <label for="card-number">Card Number *</label>
+                            <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry">Expiry Date *</label>
+                                <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV *</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="checkout-btn">Complete Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 T-Shirt Shop. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const loading = document.querySelector('.loading');
+            
+            // Hide loading animation after page loads
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    loading.classList.add('hidden');
+                }, 500);
+            });
+        });
+
+        // Initialize cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Update cart count in the UI
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+
+        // Display order summary
+        function displayOrderSummary() {
+            const orderItemsContainer = document.getElementById('order-items');
+            const orderTotalElement = document.getElementById('order-total-amount');
+            
+            if (cart.length === 0) {
+                orderItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                orderTotalElement.textContent = '0.00';
+                return;
+            }
+            
+            let orderHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                // Extract numeric price (remove $ sign)
+                const price = parseFloat(item.price.replace('$', ''));
+                const itemTotal = price * item.quantity;
+                total += itemTotal;
+                
+                orderHTML += `
+                    <div class="order-item">
+                        <div>
+                            <strong>${item.name}</strong>
+                            <p>Qty: ${item.quantity}</p>
+                        </div>
+                        <div>
+                            <p>$${itemTotal.toFixed(2)}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            orderItemsContainer.innerHTML = orderHTML;
+            orderTotalElement.textContent = total.toFixed(2);
+        }
+
+        // Form validation and submission
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            displayOrderSummary();
+            
+            const checkoutForm = document.getElementById('checkout-form');
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Simple form validation
+                    const requiredFields = checkoutForm.querySelectorAll('[required]');
+                    let isValid = true;
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            field.style.borderColor = '#ff4757';
+                            isValid = false;
+                        } else {
+                            field.style.borderColor = '#ddd';
+                        }
+                    });
+                    
+                    if (isValid) {
+                        // Process order (in a real app, this would send data to a server)
+                        processOrder();
+                    } else {
+                        alert('Please fill in all required fields.');
+                    }
+                });
+            }
+        });
+
+        // Process order and show confirmation
+        function processOrder() {
+            // Get form data
+            const formData = new FormData(document.getElementById('checkout-form'));
+            const orderData = {};
+            for (let [key, value] of formData.entries()) {
+                orderData[key] = value;
+            }
+            
+            // Store order data in localStorage (in a real app, this would be sent to a server)
+            const order = {
+                id: Date.now(),
+                items: cart,
+                customer: orderData,
+                total: document.getElementById('order-total-amount').textContent,
+                date: new Date().toISOString()
+            };
+            
+            // Get existing orders or create new array
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            // Clear cart
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Show confirmation
+            showOrderConfirmation(order);
+        }
+
+        // Show order confirmation
+        function showOrderConfirmation(order) {
+            // Replace the checkout content with confirmation
+            const checkoutContainer = document.querySelector('.checkout-container');
+            checkoutContainer.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <h2 style="color: #4CAF50; margin-bottom: 1rem;">✓ Order Confirmed!</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Thank you for your purchase!</p>
+                    
+                    <div style="background-color: var(--light-color); padding: 2rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto;">
+                        <h3>Order Details</h3>
+                        <p><strong>Order Number:</strong> ${order.id}</p>
+                        <p><strong>Total Amount:</strong> $${order.total}</p>
+                        <p><strong>Delivery to:</strong></p>
+                        <p>${order.customer.fullname}<br>
+                        ${order.customer.address}<br>
+                        ${order.customer.city}, ${order.customer.zip}<br>
+                        ${order.customer.country}</p>
+                        
+                        <p style="margin-top: 2rem; color: #666;">Your t-shirts will be delivered within 3-5 business days.</p>
+                        
+                        <a href="index.html" class="checkout-btn" style="text-decoration: none; display: inline-block; margin-top: 2rem;">Continue Shopping</a>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

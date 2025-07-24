@@ -248,7 +248,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function() {
             if (cart.length > 0) {
-                showNotification('Proceeding to checkout!');
+                // Redirect to checkout page
+                window.location.href = 'checkout.html';
             } else {
                 showNotification('Your cart is empty!');
             }
